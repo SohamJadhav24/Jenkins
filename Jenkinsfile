@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-        label 'docker_agent'
-    }
+    agent any
     environment {
         DOCKER_IMAGE = 'python:3.9' 
     }

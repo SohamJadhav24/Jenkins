@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    tools{
+        jdk 'OpenJDK8'
+        mavern 'Mavern3'
+    }
     environment {
         DOCKER_IMAGE = 'python:3.9' 
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'

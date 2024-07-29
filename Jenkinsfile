@@ -14,16 +14,16 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('\''DjangoCRM'\'')
+                    docker.build('DjangoCRM')
                 }
             }
         }
         stage('Run Django Tests') {
             steps {
                 script {
-                    docker.image('\''DjangoCRM'\'').inside {
-                        sh '\''pip install -r requirements.txt'\''
-                        sh '\''python manage.py test'\''
+                    docker.image('DjangoCRM').inside {
+                        sh 'pip install -r requirements.txt'
+                        sh 'python manage.py test'
                     }
                 }
             }
@@ -31,9 +31,9 @@ pipeline {
         stage('Run Django Server') {
             steps {
                 script {
-                    docker.image('\''DjangoCRM'\'').inside {
-                        sh '\''pip install -r requirements.txt'\''
-                        sh '\''python manage.py runserver 0.0.0.0:8000'\''
+                    docker.image('DjangoCRM').inside {
+                        sh 'pip install -r requirements.txt'
+                        sh 'python manage.py runserver 0.0.0.0:8000'
                     }
                 }
             }
@@ -42,7 +42,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh '\''docker-compose up -d'\''                 
+                    sh 'docker-compose up -d'                 
 		        }
             }
         }

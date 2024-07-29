@@ -25,7 +25,7 @@ pipeline {
         stage('Run Django Tests') {
             steps {
                 script {
-                    docker.image('DjangoCRM').inside {
+                    docker.image('JenkinsImg').inside {
                         sh 'pip install -r requirements.txt'
                         sh 'python manage.py test'
                     }
@@ -35,7 +35,7 @@ pipeline {
         stage('Run Django Server') {
             steps {
                 script {
-                    docker.image('DjangoCRM').inside {
+                    docker.image('JenkinsImg').inside {
                         sh 'pip install -r requirements.txt'
                         sh 'python manage.py runserver 0.0.0.0:8000'
                     }

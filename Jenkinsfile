@@ -12,7 +12,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('DjangoCRM ')
+                    docker.build('DjangoCRM')
                 }
             }
         }

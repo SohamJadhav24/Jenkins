@@ -11,6 +11,15 @@ pipeline {
     
 
     stages {
+
+         stage('Checkout') {
+            steps {
+                script {
+                    git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main'
+                    sh 'git config http.postBuffer 524288000'  // Increase buffer size
+                }
+            }
+        }
 	    stage('Clone Repository') {
             steps {
                 git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main', credentialsId: 'my-github-credentials'

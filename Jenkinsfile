@@ -2,7 +2,7 @@ pipeline {
     agent any
     tools{
         jdk 'OpenJDK8'
-        mavern 'Mavern3'
+        maven 'Maven3'
     }
     environment {
         DOCKER_IMAGE = 'python:3.9' 

@@ -16,14 +16,7 @@ pipeline {
                 git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main', credentialsId: 'my-github-credentials'
             }
         }
-        stage('Test Docker') {
-            steps {
-                script {
-                    def dockerHome = tool name: 'Docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-                    sh "${dockerHome}/bin/docker --version"
-                }
-            }
-        }
+       
         stage('Build and Push Docker Image') {
             steps {
                 script {

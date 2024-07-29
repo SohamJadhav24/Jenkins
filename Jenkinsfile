@@ -16,23 +16,28 @@ pipeline {
                 git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main', credentialsId: 'my-github-credentials'
             }
         }
-        stage('Build Docker Image') {
+        stage('Build and Push Docker Image') {
             steps {
                 script {
-                    sh 'docker build -t sohamjadhav24/JenkinsImg .'
-                }
-            }
-        }
-        stage('Run Django Tests') {
-            steps {
-                script {
-                    docker.image('JenkinsImg').inside {
-                        sh 'pip install -r requirements.txt'
-                        sh 'python manage.py test'
+                    // This step should not normally be used in your script. Consult the inline help for details.
+                    withDockerRegistry(credentialsId: 'my-github-credentials', toolName: 'Docker') {
+                        sh 'docker build -t sohamjadhav24/jenkins_docker:tag123'
+                        sh 'docker push'
                     }
+                    
                 }
             }
         }
+        // stage('Run Django Tests') {
+        //     steps {
+        //         script {
+        //             docker.image('JenkinsImg').inside {
+        //                 sh 'pip install -r requirements.txt'
+        //                 sh 'python manage.py test'
+        //             }
+        //         }
+        //     }
+        // }
         stage('Run Django Server') {
             steps {
                 script {

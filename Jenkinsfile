@@ -2,7 +2,10 @@ pipeline {
     agent any
     environment {
         DOCKER_IMAGE = 'python:3.9' 
+        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
     }
+    
+
     stages {
 	    stage('Clone Repository') {
             steps {

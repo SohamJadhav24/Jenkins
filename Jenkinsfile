@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent{
+        label 'Docker_agent'
+
+    }
     environment {
         DOCKER_IMAGE = 'python:3.9' 
         DOCKER_COMPOSE_FILE = 'docker-compose.yml'
@@ -12,41 +15,41 @@ pipeline {
                 git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main', credentialsId: 'my-github-credentials'
             }
         }
-        // stage('Build Docker Image') {
-        //     steps {
-        //         script {
-        //             docker.build('DjangoCRM')
-        //         }
-        //     }
-        // }
-        // stage('Run Django Tests') {
-        //     steps {
-        //         script {
-        //             docker.image('DjangoCRM').inside {
-        //                 sh 'pip install -r requirements.txt'
-        //                 sh 'python manage.py test'
-        //             }
-        //         }
-        //     }
-        // }
-        // stage('Run Django Server') {
-        //     steps {
-        //         script {
-        //             docker.image('DjangoCRM').inside {
-        //                 sh 'pip install -r requirements.txt'
-        //                 sh 'python manage.py runserver 0.0.0.0:8000'
-        //             }
-        //         }
-        //     }
-        // }
-
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
                 script {
-                    sh '/usr/local/bin/docker-compose -f docker-compose.yml up -d'             
-		        }
+                    docker.build('JenkinsImg')
+                }
             }
         }
+        stage('Run Django Tests') {
+            steps {
+                script {
+                    docker.image('DjangoCRM').inside {
+                        sh 'pip install -r requirements.txt'
+                        sh 'python manage.py test'
+                    }
+                }
+            }
+        }
+        stage('Run Django Server') {
+            steps {
+                script {
+                    docker.image('DjangoCRM').inside {
+                        sh 'pip install -r requirements.txt'
+                        sh 'python manage.py runserver 0.0.0.0:8000'
+                    }
+                }
+            }
+        }
+
+        // stage('Deploy') {
+        //     steps {
+        //         script {
+        //             sh '/usr/local/bin/docker-compose -f docker-compose.yml up -d'             
+		//         }
+        //     }
+        // }
 
     }
     post {

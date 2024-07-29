@@ -1,9 +1,9 @@
 pipeline {
     agent {
-        label '\''docker_agent'\''
+        label 'docker_agent'
     }
     environment {
-        DOCKER_IMAGE = '\''python:3.9'\'' 
+        DOCKER_IMAGE = 'python:3.9' 
     }
     stages {
 	    stage('Clone Repository') {

@@ -1,14 +1,5 @@
 pipeline {
-    agent any
-    tools{
-        jdk 'OpenJDK8'
-        maven 'Maven3'
-    }
-    environment {
-        DOCKER_IMAGE = 'python:3.9' 
-        DOCKER_COMPOSE_FILE = 'docker-compose.yml'
-    }
-    
+    agent any    
 
     stages {
 	    stage('Clone Repository') {

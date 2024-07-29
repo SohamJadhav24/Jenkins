@@ -11,14 +11,14 @@ pipeline {
                 git url: 'https://github.com/SohamJadhav24/Jenkins.git', branch: 'main', credentialsId: '2cc1bd6f-7a93-42b7-bd05-0d66bc88eb19'
             }
         }
-        stage('\''Build Docker Image'\'') {
+        stage('Build Docker Image') {
             steps {
                 script {
                     docker.build('\''DjangoCRM'\'')
                 }
             }
         }
-        stage('\''Run Django Tests'\'') {
+        stage('Run Django Tests') {
             steps {
                 script {
                     docker.image('\''DjangoCRM'\'').inside {
@@ -28,7 +28,7 @@ pipeline {
                 }
             }
         }
-        stage('\''Run Django Server'\'') {
+        stage('Run Django Server') {
             steps {
                 script {
                     docker.image('\''DjangoCRM'\'').inside {

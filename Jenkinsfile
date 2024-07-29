@@ -29,7 +29,7 @@ pipeline {
                 script {
                     // This step should not normally be used in your script. Consult the inline help for details.
                     withDockerRegistry(credentialsId: 'my-github-credentials', toolName: 'Docker') {
-                        sh 'docker build -t sohamjadhav24/jenkins_docker:tag123'
+                        sh 'docker build -t sohamjadhav24/jenkins_docker:tag123 .'
                         sh 'docker push'
                     }
                     

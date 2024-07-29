@@ -40,6 +40,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
+                    sh 'pip install docker-compose'
                     sh 'docker-compose up -d'                 
 		        }
             }

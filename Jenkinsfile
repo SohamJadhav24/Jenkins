@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build('JenkinsImg')
+                    sh 'docker build -t sohamjadhav24/JenkinsImg .'
                 }
             }
         }

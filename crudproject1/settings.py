@@ -23,9 +23,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-n=q_f$bs9e+%lk8ommp%^^v)t#!%n=ge9uejnk8hi3#d99j9sv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-# ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+# settings.py
+
+# import os
+
+# # Other settings...
+
+# DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
+
+# ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '*').split(',')
+
+
+
+
+
+
+
 
 
 # Application definition
@@ -80,6 +97,13 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+import os
+
+if os.getenv('DATABASE_URL'):
+    import dj_database_url
+    DATABASES['default'] = dj_database_url.config(default=os.getenv('DATABASE_URL'))
+
 
 
 # Password validation
